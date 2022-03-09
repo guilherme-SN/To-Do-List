@@ -1,22 +1,39 @@
 {% extends 'main/base.html' %}
 
+{% block specificStyle %}
+    <script src="https://kit.fontawesome.com/5b6c464799.js" crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block title %}List{% endblock %}
 
 {% block content %}
     <h1>{{ls.name}}</h1>
-    <form method="post" action="#">
-        {% for item in ls.item_set.all %}
-            <ul>
-                {% if item.checkComplete == True %}
-                    <li><input type="checkbox", name="c{{item.id}}", value="clicked" checked>{{item.txt}}</li>
-                {% else %}
-                    <li><input type="checkbox", name="c{{item.id}}", value="clicked">{{item.txt}}</li>
-                {% endif %}
-            </ul>
-        {% endfor %}
+    <form method="post" action="#" class="form-group">
         {% csrf_token %}
-        <button type="submit" name="save" value="save">Save</button>
-        <input type="text" name='newItem'>
-        <button type="submit" name="new" value="new">Create New Item</button>
+        {% for item in ls.item_set.all %}
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text mr-2">
+                    <!-- {% if item.checkComplete == True %}
+                        <input type="checkbox", name="c{{item.id}}", value="clicked" checked>
+                    {% else %}
+                        <input type="checkbox", name="c{{item.id}}", value="clicked">
+                    {% endif %} -->
+                    <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 20px;"><i class="fa-solid fa-trash-can"></i></button>
+                    <button><i class="fa-solid fa-pen"></i></button>
+                </div>
+            </div>
+            <input type="text", value="{{item.txt}}" class="form-control" disabled style="background:none;">
+        </div>
+
+        {% endfor %}
+        <div class="input-group mb-3 mt-3">
+            <div class="input-group-prepend">
+                <button type="submit" name="new" value="new" class="btn btn-outline-primary">Create New Item</button>
+            </div>
+            <input type="text" name='newItem'>
+        </div>
+
+        <button type="submit" name="save" value="save" class="btn btn-outline-primary">Save</button>
     </form>
 {% endblock %}
