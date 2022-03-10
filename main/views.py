@@ -1,7 +1,7 @@
-from tokenize import TokenInfo
 from django.shortcuts import render, HttpResponseRedirect
 from .models import Item, ToDoList
 from .forms import CreateNewToDo
+
 # Create your views here.
 def index(response, id):
     ls = ToDoList.objects.get(id=id)
@@ -18,7 +18,7 @@ def index(response, id):
             elif response.POST.get('new'):
                 txt = response.POST.get('newItem')
                 if len(txt) > 2:
-                    ls.item_set.create(txt=txt, checkComplete=False)
+                    ls.item_set.create(txt=txt, checkComplete=False)    
                 else:
                     print('Invalid')
             else:
@@ -26,6 +26,10 @@ def index(response, id):
                     if response.POST.get('d' + str(item.id)) == 'delete':
                         item.delete()
                         ls.save()
+                    elif response.POST.get('u' + str(item.id)) == 'update':
+                        print('etnre')
+                        return HttpResponseRedirect(f'/update/{id}/{item.id}')
+                        
         return render(response, 'main/list.html', {"ls": ls})
     return render(response, 'main/view.html', {})
 
@@ -52,3 +56,16 @@ def create(response):
 
 def view(response):
     return render(response, 'main/view.html', {})
+
+
+def update(response, id_td, id_item):
+    ls = ToDoList.objects.get(id=id_td)
+    item = ls.item_set.get(id=id_item)
+
+    if response.method == 'POST':
+        print(response.POST)
+        item.txt = response.POST.get('ntext')
+        item.save()
+        return HttpResponseRedirect(f'/{id}')
+        
+    return render(response, 'main/update.html', {"text": item})
