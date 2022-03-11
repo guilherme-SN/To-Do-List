@@ -13,3 +13,4 @@
 - [ ] Make a better sidebar
 - [ ] Add CSS and Bootstrap
 - [ ] Add a search bar to the site
+- [ ] Comment and add documentation

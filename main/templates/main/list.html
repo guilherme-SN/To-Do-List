@@ -2,42 +2,58 @@
 
 {% block specificStyle %}
     <script src="https://kit.fontawesome.com/5b6c464799.js" crossorigin="anonymous"></script>
+    
+    <style>
+        .itembtn {
+            width: 500px;
+            border: none;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .completed {
+            background: rgb(85, 201, 89, 0.15);
+        }
+
+        .deletebtn {
+            color: red;
+        }
+
+        .updatebtn {
+            color: blue;
+        }
+    </style>
+
 {% endblock %}
 
 {% block title %}List{% endblock %}
 
 {% block content %}
-    <h1>{{ls.name}}</h1>
-    <form method="post" action="#" class="form-group">
-        {% csrf_token %}
-        {% for item in ls.item_set.all %}
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text mr-2">
-                  
-                    
-                    <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 20px;"><i class="fa-solid fa-trash-can"></i></button>
-                    <button type="submit" name="u{{item.id}}" value="update"><i class="fa-solid fa-pen"></i></button></a>
-                    {% if item.checkComplete == True %}
-                        <button type="submit" name="c{{item.id}}" value="clicked" class="form-control" style="background:none; text-decoration:line-through;">{{item.txt}}</button>
-                    {% else %}
-                        <button type="submit" name="c{{item.id}}" value="clicked" class="form-control" style="background:none;">{{item.txt}}</button>
-                    {% endif %}
+    <div class="maindiv">
+        <h1>{{ls.name}}</h1>
+        <form method="post" action="#" class="form-group">
+            {% csrf_token %}
+            {% for item in ls.item_set.all %}
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text mr-2"  style="background-color: white;">
+                            <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 10px; background-color: white; border: none;" class="deletebtn"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" name="u{{item.id}}" value="update" style="background-color: white; border: none;" class="updatebtn"><i class="fa-solid fa-pen"></i></button></a>
+                            {% if item.checkComplete == True %}
+                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control completed itembtn" style="text-decoration:line-through;">{{item.txt}}</button>
+                            {% else %}
+                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control itembtn" style="background:none;">{{item.txt}}</button>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-        </div>
-
-        {% endfor %}
-        <div class="input-group mb-3 mt-3">
-            <div class="input-group-prepend">
-                <button type="submit" name="new" value="new" class="btn btn-outline-primary">Create New Item</button>
-            </div>
-            <input type="text" name='newItem'>
-        </div>
-
-        <button type="submit" name="save" value="save" class="btn btn-outline-primary">Save</button>
-        
-    </form>
-    
+            {% endfor %}
+            <div class="input-group mb-3 mt-3">
+                <div class="input-group-prepend">
+                    <button type="submit" name="new" value="new" class="btn btn-outline-primary">Create New Item</button>
+                </div>
+                <input type="text" name='newItem'>
+            </div>            
+        </form>
+    </div>
 {% endblock %}
