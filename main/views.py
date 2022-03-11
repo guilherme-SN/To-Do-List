@@ -8,14 +8,14 @@ def index(response, id):
 
     if ls in response.user.todolist.all():
         if response.method == 'POST':
-            if response.POST.get('save'):
-                for item in ls.item_set.all():
-                    if response.POST.get("c" + str(item.id)) == 'clicked':
-                        item.checkComplete = True
-                    else:
-                        item.checkComplete = False
-                    item.save()
-            elif response.POST.get('new'):
+            for item in ls.item_set.all():
+                if response.POST.get("c" + str(item.id)) == 'clicked' and item.checkComplete:
+                    item.checkComplete = False
+                elif response.POST.get("c" + str(item.id)) == 'clicked' and not item.checkComplete:
+                    item.checkComplete = True
+                item.save()
+           
+            if response.POST.get('new'):
                 txt = response.POST.get('newItem')
                 if len(txt) > 2:
                     ls.item_set.create(txt=txt, checkComplete=False)    
@@ -28,8 +28,7 @@ def index(response, id):
                         ls.save()
                     elif response.POST.get('u' + str(item.id)) == 'update':
                         print('etnre')
-                        return HttpResponseRedirect(f'/update/{id}/{item.id}')
-                        
+                        return HttpResponseRedirect(f'/update/{id}/{item.id}')            
         return render(response, 'main/list.html', {"ls": ls})
     return render(response, 'main/view.html', {})
 
@@ -63,9 +62,8 @@ def update(response, id_td, id_item):
     item = ls.item_set.get(id=id_item)
 
     if response.method == 'POST':
-        print(response.POST)
         item.txt = response.POST.get('ntext')
         item.save()
-        return HttpResponseRedirect(f'/{id}')
-        
+        return HttpResponseRedirect(f'/{id_td}')
+
     return render(response, 'main/update.html', {"text": item})

@@ -14,19 +14,20 @@
         <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <div class="input-group-text mr-2">
-                    <!-- {% if item.checkComplete == True %}
-                        <input type="checkbox", name="c{{item.id}}", value="clicked" checked>
-                    {% else %}
-                        <input type="checkbox", name="c{{item.id}}", value="clicked">
-                    {% endif %} -->
+                  
                     
                     <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 20px;"><i class="fa-solid fa-trash-can"></i></button>
                     <button type="submit" name="u{{item.id}}" value="update"><i class="fa-solid fa-pen"></i></button></a>
+                    {% if item.checkComplete == True %}
+                        <button type="submit" name="c{{item.id}}" value="clicked" class="form-control" style="background:none; text-decoration:line-through;">{{item.txt}}</button>
+                    {% else %}
+                        <button type="submit" name="c{{item.id}}" value="clicked" class="form-control" style="background:none;">{{item.txt}}</button>
+                    {% endif %}
                 </div>
             </div>
-            <input type="text", value="{{item.txt}}" class="form-control" disabled style="background:none;">
+            
         </div>
-        
+
         {% endfor %}
         <div class="input-group mb-3 mt-3">
             <div class="input-group-prepend">
@@ -36,5 +37,7 @@
         </div>
 
         <button type="submit" name="save" value="save" class="btn btn-outline-primary">Save</button>
+        
     </form>
+    
 {% endblock %}
