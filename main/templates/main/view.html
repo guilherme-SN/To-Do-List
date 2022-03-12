@@ -2,8 +2,20 @@
 
 {% block title %}View{% endblock %}
 
+{% block specificStyle %}
+    <style>
+        .item-btn {
+            width: 500px;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
+    <h1 style="text-align: center;">Todo Lists</h1>
+
     {% for td in user.todolist.all %}
-        <p><a href="/{{td.id}}">{{td.name}}</a></p>
+        <button class="item-btn btn btn-outline-dark" onclick="window.location='/{{td.id}}';">{{td.name}}</button>
     {% endfor %}
 {% endblock %}

@@ -3,14 +3,17 @@
 {% block title %}Create{% endblock %}
 
 {% block content %}
-    <h1 class="mb-4">Create Page</h1>
-    <form method="post" action="/create/" class="form-group">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button type="submit" class="btn btn-outline-primary">Create</button>
+    <div>
+        <h1 class="mb-4" style="text-align: center;">Create Page</h1>
+
+        <form method="post" action="/create/" class="form-group" autocomplete="off">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="submit" class="btn btn-outline-dark">Create</button>
+                </div>
+                {{form.name}}
             </div>
-            {{form.name}}
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}

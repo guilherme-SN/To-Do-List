@@ -4,10 +4,10 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <form method="post">
+    <form method="post" autocomplete="off">
         {% csrf_token %}
         {{form|crispy}}
         <p>Don't have an account? Create one <a href="/register/">HERE</a></p>
-        <button type="submit">Login</button>
+        <button type="submit" class="btn btn-outline-dark">Login</button>
     </form>
 {% endblock %}

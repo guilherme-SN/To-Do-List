@@ -8,7 +8,10 @@
             width: 500px;
             border: none;
             text-align: left;
-            margin-left: 10px;
+        }
+
+        .btns {
+            background: rgba(97, 97, 97, 0.164);
         }
 
         .completed {
@@ -30,17 +33,20 @@
 
 {% block content %}
     <div class="maindiv">
-        <h1>{{ls.name}}</h1>
+        <h1 style="padding-left: 10px;">{{ls.name}}</h1>
         <form method="post" action="#" class="form-group">
             {% csrf_token %}
             {% for item in ls.item_set.all %}
                 <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text mr-2"  style="background-color: white;">
-                            <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 10px; background-color: white; border: none;" class="deletebtn"><i class="fa-solid fa-trash-can"></i></button>
-                            <button type="submit" name="u{{item.id}}" value="update" style="background-color: white; border: none;" class="updatebtn"><i class="fa-solid fa-pen"></i></button></a>
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text btns">
+                            <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 10px; background: none; border: none;" class="deletebtn"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" name="u{{item.id}}" value="update" style="background: none; border: none;" class="updatebtn"><i class="fa-solid fa-pen"></i></button></a>
+                        </div>
+
+                        <div class="input-group-text"  style="background-color: white;">
                             {% if item.checkComplete == True %}
-                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control completed itembtn" style="text-decoration:line-through;">{{item.txt}}</button>
+                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control completed itembtn">{{item.txt}}</button>
                             {% else %}
                                 <button type="submit" name="c{{item.id}}" value="clicked" class="form-control itembtn" style="background:none;">{{item.txt}}</button>
                             {% endif %}
@@ -50,9 +56,9 @@
             {% endfor %}
             <div class="input-group mb-3 mt-3">
                 <div class="input-group-prepend">
-                    <button type="submit" name="new" value="new" class="btn btn-outline-primary">Create New Item</button>
+                    <button type="submit" name="new" value="new" class="btn btn-outline-dark">New Item</button>
                 </div>
-                <input type="text" name='newItem'>
+                <input type="text" name='newItem'  style="width: 523px;">
             </div>            
         </form>
     </div>
