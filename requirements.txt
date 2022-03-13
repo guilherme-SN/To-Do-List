@@ -70,7 +70,6 @@ sqlparse==0.4.2
 ssh-import-id
 systemd-python
 Twisted
-ubuntu-advantage-tools
 ufw
 unattended-upgrades
 urllib3==1.25.8
