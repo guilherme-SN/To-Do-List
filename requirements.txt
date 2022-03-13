@@ -71,4 +71,8 @@ ssh-import-id
 systemd-python
 Twisted
 urllib3==1.25.8
+wadllib
 whitenoise==6.0.0
+wxPython
+zipp
+zope.interface
