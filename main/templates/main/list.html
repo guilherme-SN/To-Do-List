@@ -4,7 +4,7 @@
     <script src="https://kit.fontawesome.com/5b6c464799.js" crossorigin="anonymous"></script>
     
     <style>
-        .itembtn {
+        .item-btn {
             width: 500px;
             border: none;
             text-align: left;
@@ -18,11 +18,11 @@
             background: rgb(85, 201, 89, 0.15);
         }
 
-        .deletebtn {
+        .delete-btn {
             color: red;
         }
 
-        .updatebtn {
+        .update-btn {
             color: blue;
         }
     </style>
@@ -34,26 +34,28 @@
 {% block content %}
     <div class="maindiv">
         <h1 style="padding-left: 10px;">{{ls.name}}</h1>
+
         <form method="post" action="#" class="form-group">
             {% csrf_token %}
             {% for item in ls.item_set.all %}
                 <div class="input-group mb-2">
                     <div class="input-group-prepend ">
                         <div class="input-group-text btns">
-                            <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 10px; background: none; border: none;" class="deletebtn"><i class="fa-solid fa-trash-can"></i></button>
-                            <button type="submit" name="u{{item.id}}" value="update" style="background: none; border: none;" class="updatebtn"><i class="fa-solid fa-pen"></i></button></a>
+                            <button type="submit" name="d{{item.id}}" value="delete" style="margin-right: 10px; background: none; border: none;" class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" name="u{{item.id}}" value="update" style="background: none; border: none;" class="update-btn"><i class="fa-solid fa-pen"></i></button></a>
                         </div>
 
                         <div class="input-group-text"  style="background-color: white;">
                             {% if item.checkComplete == True %}
-                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control completed itembtn">{{item.txt}}</button>
+                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control completed item-btn">{{item.txt}}</button>
                             {% else %}
-                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control itembtn" style="background:none;">{{item.txt}}</button>
+                                <button type="submit" name="c{{item.id}}" value="clicked" class="form-control item-btn" style="background:none;">{{item.txt}}</button>
                             {% endif %}
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            
             <div class="input-group mb-3 mt-3">
                 <div class="input-group-prepend">
                     <button type="submit" name="new" value="new" class="btn btn-outline-dark">New Item</button>
