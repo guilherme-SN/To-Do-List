@@ -1,6 +1,13 @@
 # To-Do-List
     To Do List using Django
 
+## How to use
+    The project isn't finished yet, but in case you want to test the application, you can go to this link: [TO-DO-APP](https://guilherme-todolistapp.herokuapp.com/login/)
+
+    You can login with a test account
+    user: test
+    password: passwordtest
+
 ## Tasks
 - [x] Make the website structure and basic functions
 - [x] Add a generic sidebar
