@@ -11,6 +11,10 @@
 - [x] Create a function to complete the tasks when it's clicked
 - [x] Make a better navbar
 - [x] Add CSS and Bootstrap
+- [ ] Add Delete and Edit button for each todo list
 - [ ] Create a pop up for Delete and Edit button
 - [ ] Choose better colors to the website
 - [ ] Add a search bar to the site
+
+## Bugs
+* When a new todo list is created, you can add the first item, but it will be replaced by the second
