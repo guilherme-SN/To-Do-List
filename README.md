@@ -2,9 +2,10 @@
     To Do List using Django
 
 ## How to use
-    The project isn't finished yet, but in case you want to test the application, you can go to this link: [TO-DO-APP](https://guilherme-todolistapp.herokuapp.com/login/)
+The project isn't finished yet, but in case you want to test the application, you can go to this link: [TO-DO-APP](https://guilherme-todolistapp.herokuapp.com/login/)
 
-    You can login with a test account
+You can login with a test account:
+
     user: test
     password: passwordtest
 
@@ -24,4 +25,4 @@
 - [ ] Add a search bar to the site
 
 ## Bugs
-* When a new todo list is created, you can add the first item, but it will be replaced by the second
+* When a new todo list is created, you can add the first item, but it will be replaced by the second one
