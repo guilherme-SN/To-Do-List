@@ -3,11 +3,25 @@
 {% block title %}View{% endblock %}
 
 {% block specificStyle %}
+    <script src="https://kit.fontawesome.com/5b6c464799.js" crossorigin="anonymous"></script>
+    
     <style>
         .item-btn {
             width: 500px;
             font-size: 20px;
             margin-top: 20px;
+        }
+
+        .btns {
+            background: rgba(97, 97, 97, 0.164);
+        }
+
+        .delete-btn {
+            color: red;
+        }
+
+        .update-btn {
+            color: blue;
         }
     </style>
 {% endblock %}
@@ -16,6 +30,20 @@
     <h1 style="text-align: center;">Todo Lists</h1>
 
     {% for td in user.todolist.all %}
-        <button class="item-btn btn btn-outline-dark" onclick="window.location='/{{td.id}}';">{{td.name}}</button>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend" style="margin: auto;">
+                <div class="input-group-text btns">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="d{{td.id}}" value="delete" style="margin-right: 10px; background: none; border: none;" class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="submit" name="u{{td.id}}" value="update" style="background: none; border: none;" class="update-btn"><i class="fa-solid fa-pen"></i></button></a>
+                    </form>
+                </div>
+                
+                <div class="input-group-text"  style="background-color: white;">
+                    <button class="item-btn btn btn-outline-dark" style="margin: auto; border: 0px;" onclick="window.location='/{{td.id}}';">{{td.name}}</button>
+                </div>
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

@@ -34,8 +34,7 @@ def index(response, id): # "main" view
                         ls.save()
                     # check if we want to update a task
                     elif response.POST.get('u' + str(item.id)) == 'update':
-                        print('etnre')
-                        return HttpResponseRedirect(f'/update/{id}/{item.id}')            
+                        return HttpResponseRedirect(f'/updateItem/{id}/{item.id}')            
         return render(response, 'main/list.html', {"ls": ls})
     return render(response, 'main/view.html', {})
 
@@ -62,10 +61,19 @@ def create(response):
 
 
 def view(response):
+    ls = ToDoList.objects.all()
+    if response.method == 'POST':
+        for item in ls:
+            if response.POST.get('d' + str(item.id)) == 'delete':
+                ToDoList.objects.filter(id=item.id).delete()
+            
+            elif response.POST.get('u' + str(item.id)) == 'update':
+                return HttpResponseRedirect(f'/updateList/{item.id}/')
+       
     return render(response, 'main/view.html', {})
 
 
-def update(response, id_td, id_item):
+def updateItem(response, id_td, id_item):
     ls = ToDoList.objects.get(id=id_td)
     item = ls.item_set.get(id=id_item)
 
@@ -74,3 +82,14 @@ def update(response, id_td, id_item):
         item.save()
         return HttpResponseRedirect(f'/{id_td}')
     return render(response, 'main/update.html', {"text": item})
+
+
+def updateList(response, id_td):
+    ls = ToDoList.objects.get(id=id_td)
+    name = ls.name
+
+    if response.method == 'POST':
+        ls.name = response.POST.get('newtext')
+        ls.save()
+        return HttpResponseRedirect('/view')
+    return render(response, 'main/update.html', {"text": name})
